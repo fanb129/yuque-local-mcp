@@ -12,6 +12,7 @@ import { assertPageStillAllowed } from "./allowlist.js";
 const EDIT_BUTTONS = ["编辑", "Edit"];
 const CREATE_BUTTONS = ["新建", "新建文档", "New"];
 const SAVE_BUTTONS = ["保存", "发布", "更新", "完成", "Save", "Publish", "Update", "Done"];
+const MARKDOWN_CONVERT_BUTTONS = ["立即转换", "转换", "Convert"];
 
 export class YuqueBrowser {
   private context?: BrowserContext;
@@ -331,7 +332,8 @@ export class YuqueBrowser {
       await page.keyboard.insertText("\n\n");
     }
 
-    await page.keyboard.insertText(markdown);
+    await this.pasteMarkdownIntoEditor(page, markdown);
+    await this.convertMarkdownIfPrompted(page);
   }
 
   private async findEditor(page: Page): Promise<Locator> {
@@ -347,6 +349,83 @@ export class YuqueBrowser {
     }
 
     throw new Error("Could not find a visible editable Yuque document body.");
+  }
+
+  private async pasteMarkdownIntoEditor(page: Page, markdown: string): Promise<void> {
+    const pasteShortcut = process.platform === "darwin" ? "Meta+Shift+V" : "Control+Shift+V";
+    const normalPasteShortcut = process.platform === "darwin" ? "Meta+V" : "Control+V";
+    let clipboardReady = false;
+
+    try {
+      const origin = new URL(page.url()).origin;
+      await page.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin });
+      await page.evaluate(async (text) => {
+        await navigator.clipboard.writeText(text);
+      }, markdown);
+      clipboardReady = true;
+    } catch {
+      clipboardReady = false;
+    }
+
+    if (clipboardReady) {
+      try {
+        await page.keyboard.press(pasteShortcut);
+        await page.waitForTimeout(800);
+        return;
+      } catch {
+        try {
+          await page.keyboard.press(normalPasteShortcut);
+          await page.waitForTimeout(800);
+          return;
+        } catch {
+          await page.keyboard.insertText(markdown);
+          return;
+        }
+      }
+    }
+
+    try {
+      const handled = await page.evaluate((text) => {
+        const target = document.activeElement;
+        if (!target) return false;
+
+        const data = new DataTransfer();
+        data.setData("text/plain", text);
+        const event = new ClipboardEvent("paste", {
+          bubbles: true,
+          cancelable: true,
+          clipboardData: data
+        });
+
+        const notCanceled = target.dispatchEvent(event);
+        return !notCanceled || event.defaultPrevented;
+      }, markdown);
+      if (!handled) throw new Error("Synthetic paste event was not handled by the editor.");
+      await page.waitForTimeout(800);
+      return;
+    } catch {
+      await page.keyboard.insertText(markdown);
+    }
+  }
+
+  private async convertMarkdownIfPrompted(page: Page): Promise<void> {
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      for (const name of MARKDOWN_CONVERT_BUTTONS) {
+        const candidates: Locator[] = [
+          page.getByRole("button", { name, exact: false }),
+          page.locator("button, [role='button'], .larkui-button, .ant-btn").filter({ hasText: name })
+        ];
+        for (const candidate of candidates) {
+          const first = candidate.first();
+          if (await first.isVisible().catch(() => false)) {
+            await first.click().catch(() => undefined);
+            await page.waitForTimeout(1500);
+            return;
+          }
+        }
+      }
+      await page.waitForTimeout(500);
+    }
   }
 
   private async saveIfPossible(page: Page): Promise<void> {
