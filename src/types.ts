@@ -14,6 +14,7 @@ export type BrowserConfig = {
 };
 
 export type WriteSafetyConfig = {
+  readOnly: boolean;
   snapshotBeforeWrite: boolean;
   requireHumanReviewInBrowser: boolean;
 };

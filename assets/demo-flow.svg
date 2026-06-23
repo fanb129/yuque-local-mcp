@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">yuque-local-mcp demo flow</title>
+  <desc id="desc">A sanitized product demo showing Codex or Claude Code calling a local MCP server, which controls a logged-in browser session for one allowlisted Yuque knowledge base.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fafc"/>
+      <stop offset="1" stop-color="#eef6f1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#12322b" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1120" height="620" fill="url(#bg)"/>
+  <rect x="44" y="44" width="1032" height="532" rx="24" fill="#ffffff" filter="url(#shadow)"/>
+
+  <text x="88" y="106" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="34" font-weight="700" fill="#15231f">yuque-local-mcp</text>
+  <text x="88" y="140" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" fill="#5d6b66">Local browser session, allowlisted Yuque books, readable and confirm-before-write tools.</text>
+
+  <rect x="88" y="190" width="250" height="230" rx="14" fill="#f3f7f6" stroke="#d7e3df"/>
+  <text x="118" y="235" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#172b25">AI Client</text>
+  <text x="118" y="270" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">Codex</text>
+  <text x="118" y="298" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">Claude Code</text>
+  <rect x="118" y="334" width="166" height="38" rx="8" fill="#1c6b5a"/>
+  <text x="138" y="358" font-family="SFMono-Regular, Consolas, monospace" font-size="14" fill="#ffffff">yuque_read_doc</text>
+
+  <rect x="435" y="178" width="250" height="254" rx="14" fill="#f8fbf9" stroke="#cbdcd6"/>
+  <text x="465" y="222" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#172b25">MCP Server</text>
+  <text x="465" y="258" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">allowlist validation</text>
+  <text x="465" y="286" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">local cache search</text>
+  <text x="465" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">snapshot before write</text>
+  <rect x="465" y="350" width="154" height="38" rx="8" fill="#e9f2ef" stroke="#bfd4cd"/>
+  <text x="484" y="374" font-family="SFMono-Regular, Consolas, monospace" font-size="14" fill="#21483f">config.json</text>
+
+  <rect x="782" y="190" width="250" height="230" rx="14" fill="#f3f7f6" stroke="#d7e3df"/>
+  <text x="812" y="235" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#172b25">Yuque Browser</text>
+  <text x="812" y="270" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">persistent login profile</text>
+  <text x="812" y="298" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="#5f6d68">one configured book only</text>
+  <rect x="812" y="334" width="170" height="38" rx="8" fill="#ffffff" stroke="#bdd5ce"/>
+  <text x="832" y="358" font-family="SFMono-Regular, Consolas, monospace" font-size="14" fill="#21483f">manual save</text>
+
+  <path d="M350 306h68" stroke="#2f7667" stroke-width="4" stroke-linecap="round"/>
+  <path d="M418 306l-14-10v20z" fill="#2f7667"/>
+  <path d="M697 306h68" stroke="#2f7667" stroke-width="4" stroke-linecap="round"/>
+  <path d="M765 306l-14-10v20z" fill="#2f7667"/>
+
+  <rect x="150" y="476" width="820" height="46" rx="10" fill="#fff9ed" stroke="#ecd79d"/>
+  <text x="178" y="505" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" fill="#69501f">Default write mode fills the browser editor and waits for a human review before saving.</text>
+</svg>

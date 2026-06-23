@@ -2,17 +2,54 @@
   "name": "yuque-local-mcp",
   "version": "0.1.0",
   "description": "A local MCP server for controlled Yuque access through your own browser session.",
+  "license": "MIT",
+  "author": "fanb129",
   "type": "module",
+  "main": "./dist/index.js",
   "bin": {
-    "yuque-local-mcp": "./dist/index.js"
+    "yuque-local-mcp": "./dist/index.js",
+    "yuque-local-mcp-login": "./dist/login.js",
+    "yuque-local-mcp-doctor": "./dist/doctor.js"
   },
+  "files": [
+    "dist",
+    "src",
+    "assets",
+    "config.example.json",
+    "config.codex.example.toml",
+    ".mcp.example.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanb129/yuque-local-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fanb129/yuque-local-mcp/issues"
+  },
+  "homepage": "https://github.com/fanb129/yuque-local-mcp#readme",
+  "keywords": [
+    "mcp",
+    "yuque",
+    "语雀",
+    "codex",
+    "claude-code",
+    "playwright",
+    "knowledge-base"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "doctor": "tsx src/doctor.ts",
-    "login": "node dist/login.js"
+    "login": "node dist/login.js",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

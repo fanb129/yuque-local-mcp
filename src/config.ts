@@ -21,10 +21,12 @@ const ConfigSchema = z.object({
   cacheDir: z.string().default("~/.yuque-local-mcp/cache"),
   writeSafety: z
     .object({
+      readOnly: z.boolean().default(false),
       snapshotBeforeWrite: z.boolean().default(true),
       requireHumanReviewInBrowser: z.boolean().default(true)
     })
     .default({
+      readOnly: false,
       snapshotBeforeWrite: true,
       requireHumanReviewInBrowser: true
     }),

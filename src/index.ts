@@ -29,6 +29,14 @@ function text(data: unknown) {
   };
 }
 
+function assertWritable(dryRun: boolean) {
+  if (!dryRun && config.writeSafety.readOnly) {
+    throw new Error(
+      "Yuque MCP is running in read-only mode. Set writeSafety.readOnly=false to enable create/update tools."
+    );
+  }
+}
+
 server.registerTool(
   "yuque_allowed_books",
   {
@@ -178,6 +186,7 @@ server.registerTool(
     })
   },
   async ({ bookUrl, title, markdown, dryRun }) => {
+    assertWritable(dryRun);
     const allowed = findAllowedBook(bookUrl, config.allowedBooks);
     const result = await yuque.createDoc({ bookUrl, allowed, title, markdown, dryRun });
     return text(result);
@@ -198,6 +207,7 @@ server.registerTool(
     })
   },
   async ({ url, markdown, mode, dryRun }) => {
+    assertWritable(dryRun);
     const allowed = findAllowedBook(url, config.allowedBooks);
     let snapshotPath: string | undefined;
 
