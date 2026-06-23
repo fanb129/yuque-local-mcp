@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.yuque-cache/
+.yuque-profile/
+config.json
+*.log

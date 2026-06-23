@@ -1,0 +1,27 @@
+[mcp_servers.yuque]
+command = "node"
+args = ["/Users/fanb/Documents/Codex/2026-06-23/wo-x/dist/index.js"]
+startup_timeout_sec = 20
+tool_timeout_sec = 180
+default_tools_approval_mode = "prompt"
+
+[mcp_servers.yuque.env]
+YUQUE_MCP_CONFIG = "/Users/fanb/Documents/Codex/2026-06-23/wo-x/config.json"
+
+[mcp_servers.yuque.tools.yuque_allowed_books]
+approval_mode = "auto"
+
+[mcp_servers.yuque.tools.yuque_read_doc]
+approval_mode = "auto"
+
+[mcp_servers.yuque.tools.yuque_get_toc]
+approval_mode = "auto"
+
+[mcp_servers.yuque.tools.yuque_search_cache]
+approval_mode = "auto"
+
+[mcp_servers.yuque.tools.yuque_create_doc]
+approval_mode = "prompt"
+
+[mcp_servers.yuque.tools.yuque_update_doc]
+approval_mode = "prompt"

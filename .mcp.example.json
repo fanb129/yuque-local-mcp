@@ -1,0 +1,9 @@
+{
+  "yuque": {
+    "command": "node",
+    "args": ["/ABSOLUTE/PATH/TO/yuque-local-mcp/dist/index.js"],
+    "env": {
+      "YUQUE_MCP_CONFIG": "/ABSOLUTE/PATH/TO/yuque-local-mcp/config.json"
+    }
+  }
+}

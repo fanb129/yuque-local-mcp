@@ -1,0 +1,21 @@
+{
+  "browser": {
+    "headless": false,
+    "profileDir": "~/.yuque-local-mcp/profile",
+    "defaultTimeoutMs": 30000,
+    "slowMoMs": 0
+  },
+  "cacheDir": "~/.yuque-local-mcp/cache",
+  "writeSafety": {
+    "snapshotBeforeWrite": true,
+    "requireHumanReviewInBrowser": true
+  },
+  "allowedBooks": [
+    {
+      "name": "示例知识库",
+      "origin": "https://www.yuque.com",
+      "group": "your-space",
+      "book": "your-book"
+    }
+  ]
+}
